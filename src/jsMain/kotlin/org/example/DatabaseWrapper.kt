@@ -24,7 +24,7 @@ class DatabaseWrapper(private val driver: WebWorkerDriver) {
   private suspend fun migrateIfNeeded() {
     val oldVersion =
       driver.awaitQuery(null, "PRAGMA $VERSION_PRAGMA", mapper = { cursor ->
-        if (cursor.next()) {
+        if (cursor.next().await()) {
           cursor.getLong(0)?.toInt()
         } else {
           null
@@ -37,7 +37,7 @@ class DatabaseWrapper(private val driver: WebWorkerDriver) {
       Database.Schema.awaitCreate(driver)
       driver.await(null, "PRAGMA $VERSION_PRAGMA=$newVersion", 0)
     } else if (oldVersion < newVersion) {
-      Database.Schema.awaitMigrate(driver, oldVersion, newVersion)
+      Database.Schema.awaitMigrate(driver, oldVersion.toLong(), newVersion)
       driver.await(null, "PRAGMA $VERSION_PRAGMA=$newVersion", 0)
     }
   }
