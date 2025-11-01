@@ -4,9 +4,11 @@ This is a proof-of-concept showing SQLDelight running with the [SQLite project's
 
 This project uses the [Origin-Private FileSystem storage](https://sqlite.org/wasm/doc/trunk/persistence.md#opfs) method to persist the database.
 
+In this fork, OPFS is enabled on GitHub Pages with the help of [`coi-serviceworker`](https://github.com/gzuidhof/coi-serviceworker).
+
 ## Demo
 
-https://dellisd.github.io/sqldelight-sqlite-wasm
+https://softartdev.github.io/sqldelight-sqlite-wasm/
 
 ## Build Requirements
 

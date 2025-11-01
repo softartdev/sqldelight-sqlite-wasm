@@ -2,7 +2,7 @@ name: Publish Sample Site
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev, web ]
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: success()
         with:
-          path: build/distributions
+          path: build/dist/js/productionExecutable
 
   deploy:
     needs: build
